@@ -7,6 +7,7 @@ import type { Mesh } from "three";
 function Orb() {
   const mesh = useRef<Mesh>(null);
   const pointer = useRef({ x: 0, y: 0 });
+  const scroll = useRef(0);
 
   useEffect(() => {
     const onMove = (e: PointerEvent) => {
@@ -19,10 +20,19 @@ function Orb() {
     return () => window.removeEventListener("pointermove", onMove);
   }, []);
 
+  useEffect(() => {
+    const onScroll = () => {
+      scroll.current = window.scrollY;
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   useFrame((state) => {
     if (!mesh.current) return;
     const t = state.clock.elapsedTime;
-    mesh.current.rotation.x = t * 0.15 + window.scrollY * 0.0005 + pointer.current.y * 0.2;
+    mesh.current.rotation.x = t * 0.15 + scroll.current * 0.0005 + pointer.current.y * 0.2;
     mesh.current.rotation.y = t * 0.2 + pointer.current.x * 0.3;
   });
 
@@ -34,7 +44,7 @@ function Orb() {
   );
 }
 
-export default function OrbCanvas() {
+export default function OrbCanvas({ onContextLost }: { onContextLost?: () => void }) {
   const wrap = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(true);
 
@@ -47,7 +57,18 @@ export default function OrbCanvas() {
 
   return (
     <div ref={wrap} aria-hidden className="absolute -right-8 -top-12 h-40 w-40">
-      <Canvas dpr={[1, 1.5]} frameloop={visible ? "always" : "never"} camera={{ position: [0, 0, 3] }} gl={{ alpha: true, antialias: true }}>
+      <Canvas
+        dpr={[1, 1.5]}
+        frameloop={visible ? "always" : "never"}
+        camera={{ position: [0, 0, 3] }}
+        gl={{ alpha: true, antialias: true }}
+        onCreated={({ gl }) => {
+          gl.domElement.addEventListener("webglcontextlost", (e) => {
+            e.preventDefault();
+            onContextLost?.();
+          });
+        }}
+      >
         <ambientLight intensity={0.6} />
         <pointLight position={[3, 2, 4]} intensity={12} color="#22d3ee" />
         <pointLight position={[-3, -2, 2]} intensity={10} color="#a78bfa" />

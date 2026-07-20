@@ -13,6 +13,9 @@ class OrbErrorBoundary extends Component<{ children: ReactNode }, { failed: bool
   static getDerivedStateFromError() {
     return { failed: true };
   }
+  componentDidCatch(error: unknown) {
+    console.error("orb crashed, falling back", error);
+  }
   render() {
     return this.state.failed ? <OrbFallback /> : this.props.children;
   }
@@ -37,7 +40,7 @@ export function OrbSlot() {
   if (mode !== "3d") return <OrbFallback />;
   return (
     <OrbErrorBoundary>
-      <OrbCanvas />
+      <OrbCanvas onContextLost={() => setMode("fallback")} />
     </OrbErrorBoundary>
   );
 }
