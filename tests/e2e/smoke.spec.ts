@@ -20,6 +20,7 @@ test("privacy invariants hold on the rendered page", async ({ page }) => {
 
 test("contact area offers LinkedIn (form is env-gated off in dev)", async ({ page }) => {
   await page.goto("/#contact");
+  await page.locator("#contact").scrollIntoViewIfNeeded();
   await expect(page.locator("#contact").getByRole("link", { name: /connect on linkedin/i })).toBeVisible();
 });
 
@@ -31,5 +32,5 @@ test("/writing renders coming-soon, not 404", async ({ page }) => {
 
 test("h1 count is exactly one", async ({ page }) => {
   await page.goto("/");
-  expect(await page.locator("h1").count()).toBe(1);
+  await expect(page.locator("h1")).toHaveCount(1);
 });
