@@ -1,6 +1,7 @@
 "use client";
 import { useActionState } from "react";
-import { submitContact, type ContactState } from "@/app/actions/contact";
+import { submitContact } from "@/app/actions/contact";
+import { type ContactState } from "@/app/actions/contact-schema";
 import { contact, site } from "@/lib/content";
 
 const initial: ContactState = { status: "idle", message: "" };

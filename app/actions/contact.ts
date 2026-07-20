@@ -1,15 +1,7 @@
 "use server";
 
-import { z } from "zod";
 import { Resend } from "resend";
-
-export const contactSchema = z.object({
-  name: z.string().min(2, "Please tell me your name."),
-  email: z.string().email("That email doesn't look right."),
-  message: z.string().min(10, "Tell me a little more — at least 10 characters."),
-});
-
-export type ContactState = { status: "idle" | "success" | "error"; message: string };
+import { contactSchema, type ContactState } from "@/app/actions/contact-schema";
 
 export async function submitContact(_prev: ContactState, formData: FormData): Promise<ContactState> {
   // honeypot: real users never fill this hidden field
