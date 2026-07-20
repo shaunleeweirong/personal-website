@@ -1,3 +1,6 @@
+import { afterEach } from "vitest";
+import { cleanup } from "@testing-library/react";
+
 // Polyfill for IntersectionObserver
 if (typeof window !== 'undefined' && !window.IntersectionObserver) {
   window.IntersectionObserver = class IntersectionObserver {
@@ -21,3 +24,8 @@ if (typeof window !== 'undefined' && !window.matchMedia) {
     dispatchEvent: () => true,
   } as any);
 }
+
+// Register testing-library cleanup after each test
+afterEach(() => {
+  cleanup();
+});
