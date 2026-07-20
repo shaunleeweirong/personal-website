@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { SmoothScroll } from "@/components/SmoothScroll";
+import { SITE_URL } from "@/lib/site";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -14,7 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://shaunlee.example.com"),
+  metadataBase: new URL(SITE_URL),
   title: "Shaun Lee Wei Rong — I build things that work",
   description:
     "Products, businesses, teams. 12+ years driving revenue inside LinkedIn, Amazon and ByteDance. Exited founder. 20+ products shipped.",
