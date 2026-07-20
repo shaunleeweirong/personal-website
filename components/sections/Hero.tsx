@@ -12,7 +12,7 @@ export function Hero({ orbSlot }: { orbSlot?: ReactNode }) {
       <div aria-hidden className="pointer-events-none absolute -top-24 right-16 h-80 w-80 rounded-full bg-[radial-gradient(circle,rgba(124,58,237,0.25),transparent_65%)]" />
       <div aria-hidden className="pointer-events-none absolute -bottom-32 -left-10 h-80 w-96 rounded-full bg-[radial-gradient(circle,rgba(6,182,212,0.16),transparent_65%)]" />
 
-      <div className="relative mx-auto flex max-w-5xl flex-col items-start gap-10 lg:flex-row lg:items-center">
+      <div className="relative mx-auto flex max-w-5xl flex-col items-start gap-10 xl:flex-row xl:items-center">
         <div className="flex-[1.4]">
           <Reveal>
             <p className="mb-4 text-xs tracking-[0.18em] text-[#67e8f9]">{hero.eyebrow}</p>
@@ -45,7 +45,7 @@ export function Hero({ orbSlot }: { orbSlot?: ReactNode }) {
           </Reveal>
         </div>
 
-        <div className="relative w-full max-w-[260px] flex-1">
+        <div className="relative mx-auto w-full max-w-[340px] flex-1 xl:mx-0">
           {orbSlot}
           <Reveal delay={0.15}>
             <HeroPhoto />

@@ -71,11 +71,11 @@ export function HeroPhoto() {
         <Image
           src="/profile.jpg"
           alt={hero.photoAlt}
-          width={520}
-          height={640}
+          width={720}
+          height={960}
           priority
-          sizes="(max-width: 1024px) 100vw, 260px"
-          className="h-[320px] w-full object-cover object-[center_20%]"
+          sizes="(max-width: 1024px) 300px, 340px"
+          className="aspect-[3/4] w-full object-cover object-[center_20%]"
         />
         {interactive && (
           <motion.div
