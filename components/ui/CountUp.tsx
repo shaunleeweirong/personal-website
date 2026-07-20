@@ -14,10 +14,14 @@ export function CountUp({
   const ref = useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { once: true });
   const reduced = useReducedMotion();
-  const [n, setN] = useState(reduced ? value : 0);
+  const [n, setN] = useState(0);
 
   useEffect(() => {
-    if (!inView || reduced) return;
+    if (!inView) return;
+    if (reduced) {
+      setN(value);
+      return;
+    }
     const start = performance.now();
     let id: number;
     const tick = (t: number) => {
@@ -31,7 +35,7 @@ export function CountUp({
 
   return (
     <span ref={ref} className={className}>
-      {reduced ? value : n}
+      {n}
       {suffix}
     </span>
   );
