@@ -1,5 +1,6 @@
 import { Nav } from "@/components/Nav";
 import { Hero } from "@/components/sections/Hero";
+import { OrbSlot } from "@/components/three/OrbSlot";
 import { StatsBand } from "@/components/sections/StatsBand";
 import { Story } from "@/components/sections/Story";
 import { TourOfDuty } from "@/components/sections/TourOfDuty";
@@ -13,7 +14,7 @@ export default function Home() {
     <div id="top">
       <Nav />
       <main>
-        <Hero />
+        <Hero orbSlot={<OrbSlot />} />
         <StatsBand />
         <Story />
         <TourOfDuty />
