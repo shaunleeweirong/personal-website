@@ -1,36 +1,45 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Shaun Lee Wei Rong — Personal Site
 
-## Getting Started
+Personal branding site — builder of products, businesses, and teams.
 
-First, run the development server:
+A mobile-first, single-page site with a dark, futuristic aesthetic: a real-time 3D hero,
+scroll-triggered reveals, and buttery smooth scrolling — engineered to stay fast and
+accessible (Lighthouse mobile 93–95 perf / 96 a11y / 100 best-practices / 100 SEO).
+
+## Stack
+
+- **Next.js** (App Router) + **TypeScript**
+- **Tailwind CSS v4**
+- **React Three Fiber** — hero 3D orb (lazy-loaded, quarantined, with reduced-motion / no-WebGL fallbacks)
+- **Motion** + **Lenis** — animation and smooth scroll
+- **Resend** — contact form delivery (server action, env-gated)
+- Tested with **Vitest** (unit) and **Playwright** (e2e), deployed on **Vercel**
+
+## Develop
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev        # http://localhost:3000
+npm run build      # production build
+npm test           # unit tests (Vitest)
+npm run test:e2e   # end-to-end (Playwright)
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Structure
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- `app/` — routes, layout, SEO (sitemap, robots, OG image, JSON-LD), contact server action
+- `components/sections/` — page sections (Hero, Story, Tour of Duty, Builds, Writing, Contact)
+- `components/three/` — isolated 3D (the only place that imports Three.js)
+- `components/ui/` — shared primitives (glass cards, reveals, count-up, tilt)
+- `lib/content.ts` — all site copy, in one place
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Configuration
 
-## Learn More
+Copy `.env.example` to `.env.local` and fill in to enable the contact form:
 
-To learn more about Next.js, take a look at the following resources:
+```
+RESEND_API_KEY=      # from resend.com
+CONTACT_TO_EMAIL=    # where contact submissions are delivered
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Without these, the contact section shows a "Connect on LinkedIn" fallback.
