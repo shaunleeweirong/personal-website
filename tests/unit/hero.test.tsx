@@ -12,10 +12,10 @@ describe("Hero", () => {
   });
   it("renders both badges and both CTAs", () => {
     render(<Hero />);
-    expect(screen.getAllByText("Now — Lead CSM @ LinkedIn").length).toBeGreaterThan(0);
-    expect(screen.getAllByText("Exited Founder").length).toBeGreaterThan(0);
-    expect(screen.getAllByRole("link", { name: /contact me/i }).length).toBeGreaterThan(0);
-    expect(screen.getAllByRole("link", { name: /connect on linkedin/i }).length).toBeGreaterThan(0);
+    expect(screen.getByText("Now — Lead CSM @ LinkedIn")).toBeDefined();
+    expect(screen.getByText("Exited Founder")).toBeDefined();
+    expect(screen.getByRole("link", { name: /contact me/i })).toBeDefined();
+    expect(screen.getByRole("link", { name: /connect on linkedin/i })).toBeDefined();
   });
 });
 

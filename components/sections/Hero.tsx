@@ -1,10 +1,11 @@
+import type { ReactNode } from "react";
 import Image from "next/image";
 import { hero, site } from "@/lib/content";
 import { Badge } from "@/components/ui/Badge";
 import { GradientText } from "@/components/ui/GradientText";
 import { Reveal } from "@/components/ui/Reveal";
 
-export function Hero({ orbSlot }: { orbSlot?: React.ReactNode }) {
+export function Hero({ orbSlot }: { orbSlot?: ReactNode }) {
   return (
     <section className="bg-grid relative overflow-hidden px-6 pb-16 pt-28 sm:px-12 lg:px-20">
       {/* glow fields */}
