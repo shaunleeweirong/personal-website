@@ -24,6 +24,21 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased`}>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Person",
+              name: "Shaun Lee Wei Rong",
+              jobTitle: "Lead Client Solutions Manager",
+              worksFor: { "@type": "Organization", name: "LinkedIn" },
+              alumniOf: ["James Cook University", "City University of New York"],
+              sameAs: ["https://www.linkedin.com/in/shaunleeweirong"],
+              description: "Builder of products, businesses and teams. Exited founder. 20+ products shipped.",
+            }),
+          }}
+        />
         <SmoothScroll>{children}</SmoothScroll>
       </body>
     </html>
