@@ -23,7 +23,7 @@ export function TourOfDuty() {
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {tour.timeline.map((t, i) => (
             <Reveal key={t.company + t.years} delay={i * 0.08}>
-              <GlassCard className="h-full !p-4">
+              <GlassCard padded={false} className="h-full p-4">
                 <p className="mb-1 text-[9px] tracking-[0.1em] text-dim">{t.years}</p>
                 <p className="text-xs font-bold text-gray-300">{t.company}</p>
                 <p className="mt-1 text-[11px] leading-snug text-gray-500">{t.detail}</p>

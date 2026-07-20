@@ -23,5 +23,6 @@ describe("TourOfDuty", () => {
     for (const co of ["ByteDance", "Amazon", "Media Co-Founder"]) {
       expect(screen.getByText(co)).toBeDefined();
     }
+    expect(screen.getByText(/Account Director — 120–130% quota/)).toBeDefined();
   });
 });
