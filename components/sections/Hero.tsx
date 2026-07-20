@@ -1,9 +1,9 @@
 import type { ReactNode } from "react";
-import Image from "next/image";
 import { hero, site } from "@/lib/content";
 import { Badge } from "@/components/ui/Badge";
 import { GradientText } from "@/components/ui/GradientText";
 import { Reveal } from "@/components/ui/Reveal";
+import { HeroPhoto } from "@/components/sections/HeroPhoto";
 
 export function Hero({ orbSlot }: { orbSlot?: ReactNode }) {
   return (
@@ -48,20 +48,7 @@ export function Hero({ orbSlot }: { orbSlot?: ReactNode }) {
         <div className="relative w-full max-w-[260px] flex-1">
           {orbSlot}
           <Reveal delay={0.15}>
-            <figure className="relative rotate-[1.5deg] overflow-hidden rounded-2xl border border-[#a78bfa]/35 shadow-[0_20px_60px_rgba(0,0,0,0.6),0_0_40px_rgba(124,58,237,0.25)]">
-              <Image
-                src="/profile.jpg"
-                alt={hero.photoAlt}
-                width={520}
-                height={640}
-                priority
-                sizes="(max-width: 1024px) 100vw, 260px"
-                className="h-[320px] w-full object-cover object-[center_20%]"
-              />
-              <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#05060f]/90 to-transparent px-4 pb-3 pt-8 text-[10px] tracking-[0.12em] text-[#c4b5fd]">
-                {hero.photoCaption}
-              </figcaption>
-            </figure>
+            <HeroPhoto />
           </Reveal>
         </div>
       </div>
