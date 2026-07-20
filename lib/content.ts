@@ -3,10 +3,10 @@ export const site = {
   monogram: "SLWR",
   linkedInUrl: "https://www.linkedin.com/in/shaunleeweirong",
   nav: [
-    { label: "Story", href: "#story" },
-    { label: "Builds", href: "#builds" },
-    { label: "Writing", href: "#writing" },
-    { label: "Contact", href: "#contact" },
+    { label: "Story", href: "/#story" },
+    { label: "Builds", href: "/#builds" },
+    { label: "Writing", href: "/#writing" },
+    { label: "Contact", href: "/#contact" },
   ],
   footer: {
     copyright: "© 2026 Shaun Lee Wei Rong",

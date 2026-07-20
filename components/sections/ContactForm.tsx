@@ -20,15 +20,15 @@ export function ContactForm() {
       <input type="text" name="company" tabIndex={-1} autoComplete="off" aria-hidden="true" className="hidden" />
       <label className="block text-xs text-body">
         Name
-        <input name="name" required minLength={2} className={`mt-1 ${inputClass}`} placeholder="Your name" />
+        <input name="name" required minLength={2} maxLength={100} className={`mt-1 ${inputClass}`} placeholder="Your name" defaultValue={state.values?.name ?? ""} />
       </label>
       <label className="block text-xs text-body">
         Email
-        <input name="email" type="email" required className={`mt-1 ${inputClass}`} placeholder="you@company.com" />
+        <input name="email" type="email" required maxLength={254} className={`mt-1 ${inputClass}`} placeholder="you@company.com" defaultValue={state.values?.email ?? ""} />
       </label>
       <label className="block text-xs text-body">
         Message
-        <textarea name="message" required minLength={10} rows={4} className={`mt-1 ${inputClass}`} placeholder="What are you building?" />
+        <textarea name="message" required minLength={10} maxLength={5000} rows={4} className={`mt-1 ${inputClass}`} placeholder="What are you building?" defaultValue={state.values?.message ?? ""} />
       </label>
       {state.status === "error" && (
         <p role="alert" className="text-xs text-red-400">

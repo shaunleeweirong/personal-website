@@ -7,19 +7,21 @@ export async function submitContact(_prev: ContactState, formData: FormData): Pr
   // honeypot: real users never fill this hidden field
   if (formData.get("company")) return { status: "success", message: "Thanks — I'll get back to you soon." };
 
-  const parsed = contactSchema.safeParse({
-    name: formData.get("name"),
-    email: formData.get("email"),
-    message: formData.get("message"),
-  });
+  const values = {
+    name: String(formData.get("name") ?? ""),
+    email: String(formData.get("email") ?? ""),
+    message: String(formData.get("message") ?? ""),
+  };
+
+  const parsed = contactSchema.safeParse(values);
   if (!parsed.success) {
-    return { status: "error", message: parsed.error.issues[0].message };
+    return { status: "error", message: parsed.error.issues[0].message, values };
   }
 
   const key = process.env.RESEND_API_KEY;
   const to = process.env.CONTACT_TO_EMAIL;
   if (!key || !to) {
-    return { status: "error", message: "The form isn't wired up yet — reach me on LinkedIn instead." };
+    return { status: "error", message: "The form isn't wired up yet — reach me on LinkedIn instead.", values };
   }
 
   try {
@@ -34,6 +36,6 @@ export async function submitContact(_prev: ContactState, formData: FormData): Pr
     return { status: "success", message: "Thanks — I'll get back to you soon." };
   } catch (err) {
     console.error("contact delivery failed", err);
-    return { status: "error", message: "Something broke on my end — reach me on LinkedIn instead." };
+    return { status: "error", message: "Something broke on my end — reach me on LinkedIn instead.", values };
   }
 }

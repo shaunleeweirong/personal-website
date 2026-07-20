@@ -34,3 +34,12 @@ test("h1 count is exactly one", async ({ page }) => {
   await page.goto("/");
   await expect(page.locator("h1")).toHaveCount(1);
 });
+
+test("reduced motion never mounts the 3D canvas", async ({ page }) => {
+  test.skip(test.info().project.name !== "reduced-motion", "reduced-motion project only");
+  await page.goto("/");
+  await page.mouse.move(200, 200);
+  await page.mouse.wheel(0, 300);
+  await page.waitForTimeout(500);
+  await expect(page.locator("canvas")).toHaveCount(0);
+});
