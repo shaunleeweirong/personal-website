@@ -19,12 +19,14 @@ export function CountUp({
   useEffect(() => {
     if (!inView || reduced) return;
     const start = performance.now();
+    let id: number;
     const tick = (t: number) => {
       const p = Math.min((t - start) / 900, 1);
       setN(Math.round(value * (1 - Math.pow(1 - p, 3))));
-      if (p < 1) requestAnimationFrame(tick);
+      if (p < 1) id = requestAnimationFrame(tick);
     };
-    requestAnimationFrame(tick);
+    id = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(id);
   }, [inView, reduced, value]);
 
   return (
