@@ -55,6 +55,7 @@ export function Hero({ orbSlot }: { orbSlot?: ReactNode }) {
                 width={520}
                 height={640}
                 priority
+                sizes="(max-width: 1024px) 100vw, 260px"
                 className="h-[320px] w-full object-cover object-[center_20%]"
               />
               <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#05060f]/90 to-transparent px-4 pb-3 pt-8 text-[10px] tracking-[0.12em] text-[#c4b5fd]">

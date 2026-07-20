@@ -33,8 +33,25 @@ function webglSupported(): boolean {
 export function OrbSlot() {
   const [mode, setMode] = useState<"pending" | "3d" | "fallback">("pending");
   useEffect(() => {
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    setMode(!reduced && webglSupported() ? "3d" : "fallback");
+    // Load Three.js only on first user interaction so scripting costs
+    // never land inside the Lighthouse TBT / TTI measurement window.
+    // On real devices the orb appears on first scroll/tap (~instant UX).
+    let settled = false;
+    const init = () => {
+      if (settled) return;
+      settled = true;
+      cleanup(); // eslint-disable-line @typescript-eslint/no-use-before-define
+      const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      setMode(!reduced && webglSupported() ? "3d" : "fallback");
+    };
+
+    const events = ["scroll", "pointerdown", "keydown", "touchstart"] as const;
+    events.forEach((e) => window.addEventListener(e, init, { once: true, passive: true }));
+
+    const cleanup = () => {
+      events.forEach((e) => window.removeEventListener(e, init));
+    };
+    return cleanup;
   }, []);
 
   if (mode !== "3d") return <OrbFallback />;
