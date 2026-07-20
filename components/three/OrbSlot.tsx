@@ -45,7 +45,7 @@ export function OrbSlot() {
       setMode(!reduced && webglSupported() ? "3d" : "fallback");
     };
 
-    const events = ["scroll", "pointerdown", "keydown", "touchstart"] as const;
+    const events = ["scroll", "pointerdown", "keydown", "touchstart", "pointermove"] as const;
     events.forEach((e) => window.addEventListener(e, init, { once: true, passive: true }));
 
     const cleanup = () => {
