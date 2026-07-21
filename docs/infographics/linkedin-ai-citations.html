@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+  :root{
+    --green-block:#cfe6c4;
+    --green-block2:#c3e0b6;
+    --green-pill:#3f8f5f;
+    --green-pill-text:#ffffff;
+    --green-sub:#e8f2df;
+
+    --pink-head:#b5199a;
+    --pink-block:#f7d9ee;
+    --pink-block2:#f3cbe8;
+    --pink-pill:#f0c4e4;
+    --pink-pill-border:#d98cc6;
+    --pink-text:#8a1478;
+
+    --blue-head:#1fa2d6;
+    --blue-block:#cfeaf7;
+    --blue-pill:#aeddf0;
+    --blue-pill-border:#6cbfe2;
+    --blue-text:#0d5f80;
+
+    --yellow-head:#f0a500;
+    --yellow-block:#f7dd7f;
+    --yellow-block2:#f3d968;
+    --yellow-card:#fbeaa8;
+    --yellow-text:#8a6200;
+
+    --ink:#123a2e;
+    --ink-soft:#2f5c4c;
+    --bg:#eef5e7;
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+
+  body{
+    font-family:'Inter',sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  .canvas{
+    width:1080px;
+    height:1350px;
+    background:
+      radial-gradient(circle at 12% 8%, rgba(255,255,255,.55), transparent 40%),
+      linear-gradient(160deg,#eef6e6 0%, #e7f1de 55%, #e2eed9 100%);
+    padding:52px 50px 34px;
+    display:flex;
+    flex-direction:column;
+    position:relative;
+    overflow:hidden;
+  }
+  .canvas::before{
+    content:"";
+    position:absolute;inset:0;
+    background-image:radial-gradient(rgba(90,140,90,.10) 1px, transparent 1.4px);
+    background-size:11px 11px;
+    opacity:.55;
+    pointer-events:none;
+  }
+  .canvas>*{position:relative;z-index:1;}
+
+  /* top bar */
+  .topbar{
+    display:flex;justify-content:space-between;align-items:center;
+    font-size:16px;font-weight:700;color:var(--ink-soft);
+    letter-spacing:.3px;
+    margin-bottom:22px;
+  }
+  .topbar .tag{
+    background:var(--ink);color:#eaf5ea;
+    padding:6px 15px;border-radius:20px;font-size:14px;font-weight:700;
+    letter-spacing:.4px;
+  }
+
+  h1{
+    font-size:48px;line-height:1.05;font-weight:900;color:var(--ink);
+    letter-spacing:-.6px;
+  }
+  .subtitle{
+    margin-top:15px;
+    font-size:19px;line-height:1.4;color:var(--ink-soft);font-weight:500;
+    max-width:940px;
+  }
+
+  /* stats card */
+  .stats{
+    margin-top:20px;
+    background:var(--green-block);
+    border-radius:22px;
+    padding:18px 24px 20px;
+    box-shadow:0 3px 0 rgba(63,143,95,.12);
+  }
+  .card-label{
+    display:inline-block;
+    background:#ffffff;
+    color:var(--ink);
+    font-weight:800;font-size:17px;
+    padding:7px 18px;border-radius:16px;
+    box-shadow:0 1px 3px rgba(0,0,0,.06);
+  }
+  .stat-row{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:20px;
+  }
+  .stat{
+    background:var(--green-sub);
+    border-radius:16px;
+    padding:15px 16px 17px;
+    text-align:center;
+  }
+  .stat .num{
+    font-size:48px;font-weight:900;color:var(--green-pill);line-height:1;
+    letter-spacing:-1px;
+  }
+  .stat .desc{
+    margin-top:9px;font-size:14px;line-height:1.32;color:var(--ink-soft);font-weight:600;
+  }
+
+  /* steps grid */
+  .steps{
+    display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:18px;
+  }
+  .step{
+    border-radius:22px;
+    padding:17px 22px 18px;
+    box-shadow:0 3px 0 rgba(0,0,0,.05);
+  }
+  .step.wide{grid-column:1 / -1;}
+  .step-head{
+    display:flex;align-items:center;gap:11px;margin-bottom:14px;
+  }
+  .step-num{
+    width:31px;height:31px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    font-weight:900;font-size:17px;color:#fff;flex:0 0 auto;
+  }
+  .step-title{font-weight:900;font-size:22px;letter-spacing:-.3px;}
+  .step-sub{font-size:15px;font-weight:600;margin-bottom:13px;opacity:.85;}
+
+  ul{list-style:none;}
+  li{
+    font-size:15.5px;line-height:1.38;font-weight:500;
+    padding-left:21px;position:relative;margin-bottom:7px;
+  }
+  li::before{
+    content:"";position:absolute;left:3px;top:7px;
+    width:8px;height:8px;border-radius:50%;
+  }
+
+  /* green step */
+  .step.green{background:var(--green-block2);}
+  .step.green .step-num{background:var(--green-pill);}
+  .step.green .step-title,.step.green li{color:var(--ink);}
+  .step.green li::before{background:var(--green-pill);}
+
+  /* pink step */
+  .step.pink{background:var(--pink-block);}
+  .step.pink .step-num{background:var(--pink-head);}
+  .step.pink .step-title{color:var(--pink-text);}
+  .step.pink li{color:#5f2456;}
+  .step.pink li::before{background:var(--pink-head);}
+
+  /* blue step */
+  .step.blue{background:var(--blue-block);}
+  .step.blue .step-num{background:var(--blue-head);}
+  .step.blue .step-title{color:var(--blue-text);}
+  .step.blue li{color:#164e66;}
+  .step.blue li::before{background:var(--blue-head);}
+
+  .depth-pill{
+    display:inline-flex;align-items:center;gap:7px;
+    background:var(--green-sub);border-radius:12px;
+    padding:9px 14px;margin-top:10px;font-size:14px;font-weight:700;color:var(--ink-soft);
+  }
+  .depth-pill b{color:var(--green-pill);}
+  .two-col{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+
+  /* closing */
+  .closing{
+    margin-top:18px;
+    background:var(--yellow-block);
+    border-radius:22px;
+    padding:18px 24px 20px;
+    text-align:center;
+    box-shadow:0 3px 0 rgba(240,165,0,.18);
+  }
+  .closing .big{
+    font-size:28px;font-weight:900;color:#7a5600;letter-spacing:-.3px;line-height:1.25;
+  }
+  .closing .big span{color:#c98800;}
+  .formula{
+    margin-top:14px;display:flex;justify-content:center;gap:12px;flex-wrap:wrap;
+  }
+  .formula .chip{
+    background:#fff5d0;color:#8a6200;font-weight:800;font-size:16px;
+    padding:11px 20px;border-radius:14px;border:1.5px solid #e6c34e;
+  }
+  .formula .plus{align-self:center;font-weight:900;color:#b98a00;font-size:20px;}
+
+  /* footer */
+  .footer{margin-top:auto;padding-top:18px;}
+  .sources{
+    font-size:14px;color:var(--ink-soft);font-weight:600;text-align:center;
+    margin-bottom:11px;
+  }
+  .sources b{color:var(--ink);}
+  .signoff{
+    display:flex;align-items:center;justify-content:center;gap:12px;
+    background:var(--ink);border-radius:16px;padding:13px 18px;
+    color:#eaf5ea;font-weight:700;font-size:17px;letter-spacing:.2px;
+  }
+  .signoff .hash{color:#8fd6a8;font-weight:800;}
+  .signoff .dot{opacity:.5;}
+</style>
+</head>
+<body>
+<div class="canvas">
+
+  <div class="topbar">
+    <span>Shaun Lee</span>
+    <span class="tag">AI &amp; LinkedIn · 2026</span>
+  </div>
+
+  <h1>How to Use LinkedIn to Get<br>Your Brand Cited by AI</h1>
+  <p class="subtitle">AI is reshaping how B2B buyers research products and build shortlists. Here is how to make your brand more discoverable and credible.</p>
+
+  <!-- STATS -->
+  <div class="stats">
+    <span class="card-label">What gets cited on LinkedIn?</span>
+    <div class="stat-row">
+      <div class="stat">
+        <div class="num">60%</div>
+        <div class="desc">of LinkedIn citations come from articles &amp; posts</div>
+      </div>
+      <div class="stat">
+        <div class="num">95%</div>
+        <div class="desc">come from original content, not reshares</div>
+      </div>
+      <div class="stat">
+        <div class="num">75%</div>
+        <div class="desc">come from individual members, not Company Pages</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEPS -->
+  <div class="steps">
+
+    <div class="step green">
+      <div class="step-head">
+        <div class="step-num">1</div>
+        <div class="step-title">Teach something useful</div>
+      </div>
+      <div class="step-sub">Educational content is your crown jewel</div>
+      <ul>
+        <li>Answer questions your customers actually ask</li>
+        <li>Share firsthand expertise, original data or unique examples</li>
+        <li>Give specific steps, frameworks &amp; recommendations</li>
+        <li>Prioritize useful info over generic opinions</li>
+      </ul>
+      <div class="two-col">
+        <div class="depth-pill">Articles: <b>800–1,200 words</b></div>
+        <div class="depth-pill">Posts: <b>200–300 words</b></div>
+      </div>
+    </div>
+
+    <div class="step pink">
+      <div class="step-head">
+        <div class="step-num">2</div>
+        <div class="step-title">Structure it for AI</div>
+      </div>
+      <div class="step-sub">Make answers easy to understand &amp; cite</div>
+      <ul>
+        <li>Put the main takeaway in the first line</li>
+        <li>Use a clear “Question : Answer” format</li>
+        <li>Define key terms &amp; use relevant keywords</li>
+        <li>Organize advice into steps, lists or best practices</li>
+        <li>Add dates to signal freshness</li>
+        <li>Include a short TL;DR for longer content</li>
+      </ul>
+    </div>
+
+    <div class="step blue wide">
+      <div class="step-head">
+        <div class="step-num">3</div>
+        <div class="step-title">Build author credibility</div>
+      </div>
+      <div class="step-sub">Credibility matters more than virality</div>
+      <div class="two-col">
+        <ul>
+          <li>Let subject-matter experts publish the original insight</li>
+          <li>Amplify it through executives &amp; the Company Page</li>
+          <li>Publish 2–3× per week, or at least weekly</li>
+        </ul>
+        <ul>
+          <li>Encourage meaningful discussions &amp; comments</li>
+          <li>Add descriptive captions to video content</li>
+          <li>Aim for 5M+ monthly impressions per thought leader (Thought Leader Ads)</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- CLOSING -->
+  <div class="closing">
+    <div class="big">The new goal is not just visibility.<br>It is <span>buyability.</span></div>
+    <div class="formula">
+      <span class="chip">Expertise</span>
+      <span class="plus">+</span>
+      <span class="chip">Authority</span>
+      <span class="plus">+</span>
+      <span class="chip">Professional Trust</span>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="sources">Sources: <b>LinkedIn</b> · <b>Semrush</b> · <b>Profound</b> · <b>Meltwater</b></div>
+    <div class="signoff">
+      <span>Share &amp; Repost if you found this useful</span>
+      <span class="dot">|</span>
+      <span>Shaun Lee</span>
+      <span class="dot">|</span>
+      <span class="hash">#digitalee</span>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
