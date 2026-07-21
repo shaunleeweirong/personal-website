@@ -7,8 +7,8 @@ describe("Hero", () => {
   it("renders the one h1 with the one-liner", () => {
     render(<Hero />);
     const h1 = screen.getByRole("heading", { level: 1 });
-    expect(h1.textContent).toContain("I build things that work");
-    expect(h1.textContent).toContain("products, businesses, teams.");
+    expect(h1.textContent).toContain("I grow revenue");
+    expect(h1.textContent).toContain("and build what scales it.");
   });
   it("renders both badges and both CTAs", () => {
     render(<Hero />);

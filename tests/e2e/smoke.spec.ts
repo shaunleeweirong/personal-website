@@ -2,7 +2,7 @@ import { test, expect } from "@playwright/test";
 
 test("home renders all sections with expected copy", async ({ page }) => {
   await page.goto("/");
-  await expect(page.getByRole("heading", { level: 1 })).toContainText("I build things that work");
+  await expect(page.getByRole("heading", { level: 1 })).toContainText("I grow revenue");
   await expect(page.getByText("01 — THE STORY")).toBeVisible();
   await expect(page.getByText("02 — THE TOUR OF DUTY")).toBeVisible();
   await expect(page.getByRole("heading", { name: "Insight Tag Tracker" })).toBeVisible();

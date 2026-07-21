@@ -16,9 +16,9 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: "Shaun Lee Wei Rong — I build things that work",
+  title: "Shaun Lee Wei Rong — I grow revenue and build what scales it",
   description:
-    "Products, businesses, teams. 12+ years driving revenue inside LinkedIn, Amazon and ByteDance. Exited founder. 20+ products shipped.",
+    "I grow revenue and build the products that scale it. 12+ years driving revenue inside LinkedIn, Amazon and ByteDance. Exited founder. 20+ products shipped.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -34,9 +34,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               name: "Shaun Lee Wei Rong",
               jobTitle: "Lead Client Solutions Manager",
               worksFor: { "@type": "Organization", name: "LinkedIn" },
-              alumniOf: ["James Cook University", "City University of New York"],
               sameAs: ["https://www.linkedin.com/in/shaunleeweirong"],
-              description: "Builder of products, businesses and teams. Exited founder. 20+ products shipped.",
+              description: "Revenue operator and builder. Grows businesses and ships products. Exited founder.",
             }),
           }}
         />

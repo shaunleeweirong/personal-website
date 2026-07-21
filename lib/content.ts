@@ -17,14 +17,14 @@ export const site = {
 export const hero = {
   eyebrow: "SHAUN LEE WEI RONG",
   badges: ["Now — Lead CSM @ LinkedIn", "Exited Founder"],
-  headline: "I build things that work —",
-  headlineGradient: "products, businesses, teams.",
+  headline: "I grow revenue —",
+  headlineGradient: "and build what scales it.",
   subline:
     "12+ years driving revenue inside LinkedIn, Amazon and ByteDance. Sold my media company. Shipped 20+ products on the side — one reached 20,000 marketers a month.",
   ctaPrimary: "Contact Me",
   ctaSecondary: "Connect on LinkedIn",
   photoAlt: "Shaun Lee Wei Rong",
-  photoCaption: "BUILDER · OPERATOR · PSYCHOLOGY NERD",
+  photoCaption: "BUILDER · OPERATOR · OWNER",
 } as const;
 
 export const stats = [
@@ -37,10 +37,10 @@ export const stats = [
 export const story = {
   id: "story",
   label: "01 — THE STORY",
-  headline: "Trained in psychology. Fluent in revenue.",
-  headlineGradient: "Compulsive about shipping.",
+  headline: "Grows revenue. Builds product.",
+  headlineGradient: "Thinks like an owner.",
   intro:
-    "Everything I do starts with the same question: what makes people act? I've answered it three ways — by building products, growing businesses, and leading teams.",
+    "I do three things well: grow revenue and businesses, build and ship products, and lead the teams that scale both. I own the result end to end.",
   cards: [
     {
       label: "PRODUCTS",
@@ -106,7 +106,7 @@ export const writing = {
   comingSoon: [
     "What selling for LinkedIn taught me about building products",
     "How I ship a product a month with a full-time big-tech job",
-    "Psychology of the buying brain — from my degree to my quota",
+    "Growing revenue like you own the business",
   ],
 } as const;
 

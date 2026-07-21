@@ -12,8 +12,8 @@ describe("content invariants (spec §2 privacy + narrative rules)", () => {
     expect(allText).not.toMatch(/[\w.+-]+@[\w-]+\.\w+/);
   });
   it("hero one-liner is exact", () => {
-    expect(content.hero.headline).toBe("I build things that work —");
-    expect(content.hero.headlineGradient).toBe("products, businesses, teams.");
+    expect(content.hero.headline).toBe("I grow revenue —");
+    expect(content.hero.headlineGradient).toBe("and build what scales it.");
   });
   it("has 4 stats and 5 featured builds (1 hero + 4 grid)", () => {
     expect(content.stats).toHaveLength(4);

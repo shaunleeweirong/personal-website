@@ -2,7 +2,7 @@ import { ImageResponse } from "next/og";
 
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
-export const alt = "Shaun Lee Wei Rong — I build things that work";
+export const alt = "Shaun Lee Wei Rong — I grow revenue and build what scales it";
 
 export default function OgImage() {
   return new ImageResponse(
@@ -21,7 +21,7 @@ export default function OgImage() {
         }}
       >
         <div style={{ fontSize: 22, letterSpacing: 4, color: "#67e8f9", marginBottom: 24 }}>SHAUN LEE WEI RONG</div>
-        <div style={{ fontSize: 64, fontWeight: 800, lineHeight: 1.1 }}>I build things that work —</div>
+        <div style={{ fontSize: 64, fontWeight: 800, lineHeight: 1.1 }}>I grow revenue —</div>
         <div
           style={{
             fontSize: 64,
@@ -32,7 +32,7 @@ export default function OgImage() {
             color: "transparent",
           }}
         >
-          products, businesses, teams.
+          and build what scales it.
         </div>
         <div style={{ fontSize: 24, color: "#8890a4", marginTop: 28 }}>
           LinkedIn · Amazon · ByteDance — exited founder, 20+ products shipped
